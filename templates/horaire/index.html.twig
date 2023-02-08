@@ -1,60 +1,124 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HoraireController!{% endblock %}
+{% block title %}Hello HoraireController!
+{% endblock %}
 
 {% block body %}
 
-<div class="container mt-5">
-    <p class="text-danger">page où on retrouve nos horaires (salarié , salarié 2..)</p>
+	<div class="container mt-5">
+		<p class="text-danger">page où on retrouve nos horaires (salarié , salarié 2..)</p>
 
-    <div>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTypeHoraire">Ajout d'un horaire</button>
+		<div>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTypeHoraire">Ajout d'un horaire</button>
 
-      <!-- modal modifier entreprise -->
-      <div class="modal fade" id="addTypeHoraire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTypeHoraireLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title color_green" id="addTypeHoraireLabel">Ajout d'un type d'horaire</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+			<!-- modal modifier entreprise -->
+			<div class="modal fade" id="addTypeHoraire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTypeHoraireLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title color_green" id="addTypeHoraireLabel">Ajout d'un type d'horaire</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
 
-            <div class="modal-body">
-              {{ form_start(form_add_horraire) }}
+						<div class="modal-body">
+							{{ form_start(form_add_horraire) }}
 
-              <div class="mt-4">
-                {{ form_widget(form_add_horraire.name) }}
-                <span class="error">{{ form_errors(form_add_horraire.name) }}</span>
-              </div>
-            </div>
+							<div class="mt-4">
+								{{ form_widget(form_add_horraire.name) }}
+								<span class="error">{{ form_errors(form_add_horraire.name) }}</span>
+							</div>
+							<div class="mt-4">
+								{{ form_widget(form_add_horraire.comment) }}
+								<span class="error">{{ form_errors(form_add_horraire.comment) }}</span>
+							</div>
+							<div class="mt-4">
+								<label for="">Date et heure de début
+								</label>
+								{{ form_widget(form_add_horraire.startDate) }}
+								<span class="error">{{ form_errors(form_add_horraire.startDate) }}</span>
+							</div>
+							<div class="mt-4">
+								<label for="">Date et heure de fin
+								</label>
+								{{ form_widget(form_add_horraire.endDate) }}
+								<span class="error">{{ form_errors(form_add_horraire.endDate) }}</span>
+							</div>
+							<div class="mt-4">
+								{{ form_widget(form_add_horraire.typeHoraire) }}
+								<span class="error">{{ form_errors(form_add_horraire.typeHoraire) }}</span>
+							</div>
 
-            <div class="modal-footer">
-              <button type="button" style="text-transform: none; margin-right: 1rem;" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-              <button type="submit" style="text-transform: none;" class="btn btn-primary">Enregistrer</button>
-            </div>
-                {{ form_end(form_add_horraire) }}
-          </div>
-        </div>
-      </div>
-    </div>
+							<div class="mt-4">
+								{{ form_widget(form_add_horraire.priority) }}
+								<span class="error">{{ form_errors(form_add_horraire.priority) }}</span>
+							</div>
 
-    <div>
-      {% for horaires in horaire %} <div class="dropdown">
-        {% if horaires %}
-        
-         
-         {{ horaires.name }}
-         <a href="{{path('app_edit_type_horaire', { name: horaires.name }) }}">Modifier</a>
-       
-        
-        	<a  href="{{path('app_delete_typeHoraire', {'id': horaires.id}) }}" onclick=" return confirm('Attention, ceci va être supprimé définitivement ') ">Supprimer</a>
-               
-        {% if horaires %}
-          <p>Vous n'avez pas encore ajouté de type d'horaire</p>
-        {% endif %}
-        
-      {% endfor %}
-    </div>
-</div>
+						</div>
+						<br>
+						<br>
+
+						<div class="modal-footer">
+							<button type="button" style="text-transform: none; margin-right: 1rem;" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+							<button type="submit" style="text-transform: none;" class="btn btn-primary">Enregistrer</button>
+						</div>
+						{{ form_end(form_add_horraire) }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			{% for horaires in horaire %}
+				<div class="dropdown">
+
+
+					<div>
+
+						nom :
+
+						<span class="text-success">{{ horaires.name }}</span>
+						<br>
+						compentaire :
+
+						<span class="text-success">{{ horaires.comment }}</span>
+						<br>
+						date de début :
+
+						<span class="text-success">
+							{{ horaires.startDate|date('d/m/Y H:i') }}</span>
+						<br>
+						date de fin :
+
+						<span class="text-success">{{ horaires.endDate|date('d/m/Y H:i') }}</span>
+						<br>
+						date création :
+
+						<span class="text-success">{{ horaires.createdDate|date('d/m/Y H:i') }}</span>
+						<br>
+						date derniere modif :
+
+						<span class="text-success">{{ horaires.modifiedDate|date('d/m/Y H:i') }}</span>
+						<br>
+						le type d'horaire :
+
+						<span class="text-success">
+							{{ horaires.typeHoraire.name }}</span>
+						<br>
+						la priorité :<span class="text-success">
+							{{ horaires.priority }}</span>
+
+
+						<a href="{{path('app_edit_horaire', { name: horaires.name }) }}">Modifier</a>
+
+
+						<a href="{{path('app_delete_typeHoraire', {'id': horaires.id}) }}" onclick=" return confirm('Attention, ceci va être supprimé définitivement ') ">Supprimer</a>
+					</div>
+					<br>
+					<br>
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

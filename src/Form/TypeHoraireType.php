@@ -17,9 +17,9 @@ class TypeHoraireType extends AbstractType
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Entrez le nom de l\'horraire type'
+                    'placeholder' => 'Entrez le nom de l\'horaire type'
                 ],
-                'label' => 'Nom de l\'horraire type (ex: Jour, Nuit, Weekend...)'
+                'label' => 'Nom de l\'horaire type (ex: Jour, Nuit, Weekend...)'
             ]);
     }
 

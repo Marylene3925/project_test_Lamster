@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Horaire;
 use App\Entity\TypeHoraire;
-use DateTime;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,12 +21,13 @@ class HoraireType extends AbstractType
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Entrez le nom de l\'horraire type'
+                    'placeholder' => 'Entrez le nom de l\'horaire'
                 ],
-                'label' => 'Nom de l\'horraire type (ex: Jour, Nuit, Weekend...)'
+                'label' => 'Nom de l\'horaire (ex: Jour, Nuit, Weekend...)'
             ])
 
             ->add('comment', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Entrez un commentaire (optionnel)'
@@ -33,23 +35,21 @@ class HoraireType extends AbstractType
                 'label' => 'Commentaire (optionnel)'
             ])
 
-            ->add('startDate', DateTime::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Entrez une date et heure de début'
-                ],
-                'label' => 'Date et heure de début'
+            ->add('startDate', DateType::class, [
+                'widget' => 'choice',
+                'input'  => 'datetime_immutable'
             ])
 
-            ->add('endDate', DateTime::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Entrez une date et heure de fin'
-                ],
-                'label' => 'Date et heure de fin'
-            ])
             
-
+            ->add('endDate', DateType::class, [
+                'widget' => 'choice',
+                'input'  => 'datetime',
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                ],
+            ]) 
+            
+       
             ->add('typeHoraire', EntityType::class, [
                 // looks for choices from this entity
                 'class' => TypeHoraire::class,
@@ -58,20 +58,16 @@ class HoraireType extends AbstractType
                 'label' => 'choisir un type d\'horaire',
                 'required' => true,
             ])
-            
+
             ->add('priority', ChoiceType::class, [
                 'choices'  => [
-                    "😀" => "1",                    
-                    "🙂" => "2",                    
+                    "😀" => "1",
+                    "🙂" => "2",
                     "☹️" => "3",
                     "😠" => "4",
                 ],
-                
-            ])
-            
-         
-            
-            ;
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
