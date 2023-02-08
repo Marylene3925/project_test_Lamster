@@ -7,6 +7,7 @@ use App\Entity\TypeHoraire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,21 +36,12 @@ class HoraireType extends AbstractType
                 'label' => 'Commentaire (optionnel)'
             ])
 
-            ->add('startDate', DateType::class, [
-                'widget' => 'choice',
-                'input'  => 'datetime_immutable'
-            ])
+            ->add('startDate', DateTimeType::class, [])
 
-            
-            ->add('endDate', DateType::class, [
-                'widget' => 'choice',
-                'input'  => 'datetime',
-                'placeholder' => [
-                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                ],
-            ]) 
-            
-       
+
+            ->add('endDate', DateTimeType::class, [])
+
+
             ->add('typeHoraire', EntityType::class, [
                 // looks for choices from this entity
                 'class' => TypeHoraire::class,
