@@ -36,10 +36,15 @@ class HoraireType extends AbstractType
                 'label' => 'Commentaire (optionnel)'
             ])
 
-            ->add('startDate', DateTimeType::class, [])
+            ->add('startDate', DateTimeType::class, [
+                'widget' => 'single_text',
+            ])
 
 
-            ->add('endDate', DateTimeType::class, [])
+
+            ->add('endDate', DateTimeType::class, [
+                'widget' => 'single_text',
+            ])
 
 
             ->add('typeHoraire', EntityType::class, [
