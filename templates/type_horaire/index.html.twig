@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Hello TypeHoraireController!
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <p class="text-danger">page où on retrouve nos type horaires (jour, nuit , weekend ....)</p>
+
+    <div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTypeHoraire">Ajout d'un type d'horaire</button>
+
+      <!-- modal modifier entreprise -->
+      <div class="modal fade" id="addTypeHoraire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTypeHoraireLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title color_green" id="addTypeHoraireLabel">Ajout d'un type d'horaire</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              {{ form_start(form_add_typeHorraire) }}
+
+              <div class="mt-4">
+                {{ form_widget(form_add_typeHorraire.name) }}
+                <span class="error">{{ form_errors(form_add_typeHorraire.name) }}</span>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" style="text-transform: none; margin-right: 1rem;" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="submit" style="text-transform: none;" class="btn btn-primary">Enregistrer</button>
+            </div>
+                {{ form_end(form_add_typeHorraire) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      {% for type_horaires in type_horaire %} <div class="dropdown">
+        {% if type_horaires %}
+        
+         
+         {{ type_horaires.name }}
+         <a href="{{path('app_edit_type_horaire', { name: type_horaires.name }) }}">Modifier</a>
+       
+        
+        	<a  href="{{path('app_delete_typeHoraire', {'id': type_horaires.id}) }}" onclick=" return confirm('Attention, ceci va être supprimé définitivement ') ">Supprimer</a>
+               
+        {% else %}
+          <p>Vous n'avez pas encore ajouté de type d'horaire</p>
+        {% endif %}
+        
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

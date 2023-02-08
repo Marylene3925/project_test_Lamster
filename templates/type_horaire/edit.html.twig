@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Hello TypeHoraireController!
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="modal-body">
+      {{ form_start(form_edit_typeHorraire) }}
+
+    
+        <div class="mt-4 input-field">
+                {{ form_widget(form_edit_typeHorraire.name) }}
+                <span class="error">{{ form_errors(form_edit_typeHorraire.name) }}</span>
+              </div>
+
+
+      <div class="modal-footer">
+        <button type="submit" style="text-transform: none;" class="btn btn-primary">Enregistrer</button>
+      </div>
+      {{ form_end(form_edit_typeHorraire) }}
+    </div>
+  </div>
+{% endblock %}
