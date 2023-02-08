@@ -6,14 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class TypeHoraireController extends AbstractController
 {
-    #[Route('/', name: 'app_main')]
+    #[Route('/type/horaire', name: 'app_type_horaire')]
     public function index(): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        return $this->render('type_horaire/index.html.twig', [
+            'controller_name' => 'TypeHoraireController',
         ]);
     }
-
 }
