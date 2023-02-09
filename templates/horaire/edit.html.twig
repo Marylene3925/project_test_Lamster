@@ -1,1 +1,44 @@
-ccc
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HoraireController!
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="modal-body">
+			{{ form_start(form_edit_horraire) }}
+
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.name) }}
+				<span class="error">{{ form_errors(form_edit_horraire.name) }}</span>
+			</div>
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.comment) }}
+				<span class="error">{{ form_errors(form_edit_horraire.comment) }}</span>
+			</div>
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.startDate) }}
+				<span class="error">{{ form_errors(form_edit_horraire.startDate) }}</span>
+			</div>
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.endDate) }}
+				<span class="error">{{ form_errors(form_edit_horraire.endDate) }}</span>
+			</div>
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.typeHoraire) }}
+				<span class="error">{{ form_errors(form_edit_horraire.typeHoraire) }}</span>
+			</div>
+            <div class="mt-4 input-field">
+				{{ form_widget(form_edit_horraire.priority) }}
+				<span class="error">{{ form_errors(form_edit_horraire.priority) }}</span>
+			</div>
+          
+			<div class="modal-footer">
+				<button type="submit" style="text-transform: none;" class="btn btn-primary">Enregistrer</button>
+			</div>
+			{{ form_end(form_edit_horraire) }}
+		</div>
+	</div>
+{% endblock %}
