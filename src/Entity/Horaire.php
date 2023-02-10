@@ -39,6 +39,10 @@ class Horaire
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeHoraire $typeHoraire = null;
 
+    #[ORM\Column(length: 255)]
+    private?string $totalDate = null;
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,4 +143,17 @@ class Horaire
 
         return $this;
     }
+
+    public function getTotalDate(): ?string
+    {
+        return $this->totalDate;
+    }
+
+    public function setTotalDate(string $totalDate): self
+    {
+        $this->totalDate = $totalDate;
+
+        return $this;
+    }
+
 }

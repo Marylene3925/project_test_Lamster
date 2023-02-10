@@ -58,10 +58,9 @@ class HoraireType extends AbstractType
 
             ->add('priority', ChoiceType::class, [
                 'choices'  => [
-                    "😀" => "1",
-                    "🙂" => "2",
-                    "☹️" => "3",
-                    "😠" => "4",
+                    "priorité 1" => "1",
+                    "priorité 2" => "2",
+                    "priorité 3" => "3",
                 ],
 
             ]);
