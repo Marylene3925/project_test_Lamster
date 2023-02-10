@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet test Lamster
+{% endblock %}
+
+{% block body %}
+	<link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}"/>
+
+	<body class="app">
+		<header class="app-header fixed-top">
+			<div class="app-header-inner">
+				<div class="container-fluid py-2">
+					<div class="app-header-content">
+						<div class="row justify-content-between align-items-center">
+							<div class="d-flex justify-content-between">
+								<h1 class="app-page-title mb-0">Les Horaires</h1>
+								<div></div>
+								<form class="docs-search-form row gx-1 align-items-center">
+									<div class="col-auto">
+										<input type="text" id="search-docs" name="searchdocs" class="form-control search-docs" placeholder="Rechercher un horaire"/>
+									</div>
+									<div class="col-auto">
+										<button type="submit" class="btn app-btn-secondary">Rechercher</button>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="app-sidepanel" class="app-sidepanel">
+				<div id="sidepanel-drop" class="sidepanel-drop"></div>
+				<div class="sidepanel-inner d-flex flex-column">
+					<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+					<div class="app-branding">
+						Admin
+
+					</div>
+
+					<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+						<ul class="app-menu list-unstyled accordion" id="menu-accordion">
+							<li class="nav-item">
+								<a class="nav-link active" href="{{path('app_horaire')}}">
+									<span class="nav-icon">
+										<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+											<path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+										</svg>
+									</span>
+									<span class="nav-link-text">Horaires</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link " href="{{path('app_type_horaire')}}">
+									<span class="nav-icon">
+										<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+											<path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+										</svg>
+									</span>
+									<span class="nav-link-text">Types d'horaires</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<div class="app-wrapper">
+
+			<div class="mb-3 mt-3 ml-5">
+				<a href="{{path('app_horaire')}}">retour</a>
+			</div>
+			<div class="border-top ml-5 mr-5">
+				{{ form_start(form_edit_horraire) }}
+				<div class="modal-header mb-3 mt-3">
+					<h3>Modification de l'horaire :
+					</h3>
+				</div>
+				<div class="border-top d-flex justify-content-between ">
+
+					<div class="mb-3 mt-3 ">
+						<div class="mt-1 input-field">
+							<label for="exampleInputEmail1" class="form-label">Nom de l'horaire :</label>
+							{{ form_widget(form_edit_horraire.name) }}
+							<span class="error">{{ form_errors(form_edit_horraire.name) }}</span>
+						</div>
+						<div class="mt-4 input-field">
+							<label for="exampleInputEmail1" class="form-label">Commentaire de l'horaire :</label>
+							{{ form_widget(form_edit_horraire.comment) }}
+							<span class="error">{{ form_errors(form_edit_horraire.comment) }}</span>
+						</div>
+						<div class="mt-4 input-field">
+							<label for="exampleInputEmail1" class="form-label">Date de début :</label>
+							{{ form_widget(form_edit_horraire.startDate) }}
+							<span class="error">{{ form_errors(form_edit_horraire.startDate) }}</span>
+						</div>
+					</div>
+					<div class="mb-3 mt-3 ">
+						<div class="mt-4 input-field">
+							<label for="exampleInputEmail1" class="form-label mr-3">Date de fin :</label>
+							{{ form_widget(form_edit_horraire.endDate) }}
+							<span class="error">{{ form_errors(form_edit_horraire.endDate) }}</span>
+						</div>
+						<div class="mt-4 input-field">
+							<label for="exampleInputEmail1" class="form-label mr-3">Type d'horaire :</label>
+							{{ form_widget(form_edit_horraire.typeHoraire) }}
+							<span class="error">{{ form_errors(form_edit_horraire.typeHoraire) }}</span>
+						</div>
+						<div class="mt-4 input-field mb-3">
+							<label for="exampleInputEmail1" class="form-label mr-3">Priorité de l'horaire :</label>
+							{{ form_widget(form_edit_horraire.priority) }}
+							<span class="error">{{ form_errors(form_edit_horraire.priority) }}</span>
+						</div>
+						<div class="mt-4 input-field mb-3">
+							<button type="submit" style="text-transform: none;" class="btn btn-success text-white">Enregistrer</button>
+						</div>
+					</div>
+				</div>
+				{{ form_end(form_edit_horraire) }}
+			</div>
+
+		</div>
+
+
+	</body>
+
+{% endblock %}

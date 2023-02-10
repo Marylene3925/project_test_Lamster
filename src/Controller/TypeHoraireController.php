@@ -36,7 +36,7 @@ class TypeHoraireController extends AbstractController
         }
 
 
-        return $this->render('type_horaire/index.html.twig', [
+        return $this->render('admin/type_horaire/index.html.twig', [
             'form_add_typeHorraire' => $form->createView(),
             'type_horaire' => $typeHoraireRepository->findBy([], ['name' => 'asc']),
         ]);
@@ -62,7 +62,7 @@ class TypeHoraireController extends AbstractController
             return $this->redirectToRoute('app_type_horaire');
         }
 
-        return $this->render('type_horaire/edit.html.twig', [
+        return $this->render('admin/type_horaire/edit.html.twig', [
             'type_horaire' => $typeHoraireRepository->findBy([], ['name' => 'asc']),
             'form_edit_typeHorraire' => $form->createView()
 

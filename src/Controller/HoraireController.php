@@ -14,7 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HoraireController extends AbstractController
 {
-    #[Route('/horaire', name: 'app_horaire')]
+
+
+    #[Route('/', name: 'app_horaire')]
     public function index(Request $request, EntityManagerInterface $entityManager, HoraireRepository $horaireRepository): Response
     {
 
@@ -51,10 +53,7 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire');
         }
 
-
-
-
-        return $this->render('horaire/index.html.twig', [
+        return $this->render('admin/horaire/index.html.twig', [
             'form_add_horraire' => $form->createView(),
             'horaire' => $horaireRepository->findBy([], ['startDate' => 'asc']),
 
@@ -88,7 +87,7 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire');
         }
 
-        return $this->render('horaire/edit.html.twig', [
+        return $this->render('admin/horaire/edit.html.twig', [
             'horaire' => $horaireRepository->findBy([], ['name' => 'asc']),
             'form_edit_horraire' => $form->createView()
 
