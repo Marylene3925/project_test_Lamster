@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Horaire;
 use App\Form\HoraireType;
 use App\Repository\HoraireRepository;
+use DateInterval;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,14 +36,13 @@ class HoraireController extends AbstractController
             $horaire->setCreatedDate(new \DateTime());
             $horaire->setModifiedDate(new \DateTime());
 
-           
+            // --------- calcul de la durée de chaque horaire ------------
+            // je fais la différence entre ma date de début (startDate) et ma date de fin (endDate)
             $interval = $horaire->getStartDate()->diff($horaire->getEndDate());
-            $formated_interval = $interval->format('d/m/Y H:i');
+            $formated_interval = $interval->format('%y année(s) / %m mois / %djour(s)  %H:%I:%S');
+            // je met la durée dans "totalDate"
+            $horaire->setTotalDate($formated_interval);
 
-            // Et ensuite tu fais ce que tu veux de ton $formatted_interval, par exemple si la durée tu dois le mettre dans "total date" alors tu fais
-            $horaire->setTotalDate($formated_interval); // Faudra changer le type, une date formatée ce n'est plus un DateTime mais une chaine de caractère (string)
-           
-            // dd( $horaire);
 
             $entityManager->persist($horaire);
             $entityManager->flush();
@@ -53,6 +53,7 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire');
         }
 
+       
         return $this->render('admin/horaire/index.html.twig', [
             'form_add_horraire' => $form->createView(),
             'horaire' => $horaireRepository->findBy([], ['startDate' => 'asc']),
@@ -77,6 +78,14 @@ class HoraireController extends AbstractController
             //     $date = date('m/d/Y h:i:s a', time());
             //    strftime(" in French %A  %H : %M : %S and");
             $horaire->setModifiedDate(new \DateTime());
+
+            // --------- calcul de la durée de chaque horaire ------------
+            // je fais la différence entre ma date de début (startDate) et ma date de fin (endDate)
+            $interval = $horaire->getStartDate()->diff($horaire->getEndDate());
+            $formated_interval = $interval->format('%y année(s) / %m mois / %d jour(s)  %H:%I:%S');
+            // je met la durée dans "totalDate"
+            $horaire->setTotalDate($formated_interval);
+
 
             $entityManager->persist($horaire); // On confie notre entité à l'entity manager (on persist l'entité)
             $entityManager->flush(); // On execute la requete

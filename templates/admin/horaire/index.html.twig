@@ -84,30 +84,8 @@
 		</header>
 
 
-		<div class="app-wrapper">
-
-			<div class="ml-5">
-			
-			
-
-				{% for horaires in horaire %}
-					{% if horaires.name == 'lula' %}
-
-						{{horaires.name}}
-						<br>
-						{{horaires.startDate|date('Y/m/d H:i')}}
-						<br>
-						{{horaires.endDate|date('Y/m/d H:i')}}
-						<br>
-						{% set count1=0%}
-						{% set count1=count1+1 %}
-						{{count1}}
-						<br>
-					{% endif %}
-
-				{% endfor %}
-
-			</div>
+		<div
+			class="app-wrapper">
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-primary ml-4 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-upload me-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -116,9 +94,18 @@
 				</svg>
 				Saisir un horaire
 			</button>
-			<h5 class="text-center">Nombre d'horaires au total :
-				{{horaire | length}}</h5>
-
+			<div class="">
+				<h5 class="text-center">Nombre d'horaires au total :
+					{{horaire | length}}
+				</h5>
+				<br>
+				<div>
+					{% for horaires in horaire %}
+						{{horaires.totalDate}}
+						<br>
+					{% endfor %}
+				</div>
+			</div>
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -245,6 +232,10 @@
 															<div>{{horaires.createdDate|date('d/m/Y H:i')}}</div>
 														</div>
 
+														<div class="text-success">
+															<div>Durée totale :</div>
+															<div>{{horaires.totalDate}}</div>
+														</div>
 														<div>
 															<div>Date de dernière modification :</div>
 															<div>{{horaires.modifiedDate|date('d/m/Y H:i')}}</div>
@@ -337,6 +328,10 @@
 															<div>{{horaires.createdDate|date('d/m/Y H:i')}}</div>
 														</div>
 
+														<div class="text-success">
+															<div>Durée totale :</div>
+															<div>{{horaires.totalDate}}</div>
+														</div>
 														<div>
 															<div>Date de dernière modification :</div>
 															<div>{{horaires.modifiedDate|date('d/m/Y H:i')}}</div>
@@ -431,6 +426,10 @@
 															<div>{{horaires.createdDate|date('d/m/Y H:i')}}</div>
 														</div>
 
+														<div class="text-success">
+															<div>Durée totale :</div>
+															<div>{{horaires.totalDate}}</div>
+														</div>
 														<div>
 															<div>Date de dernière modification :</div>
 															<div>{{horaires.modifiedDate|date('d/m/Y H:i')}}</div>
@@ -525,6 +524,10 @@
 															<div>{{horaires.createdDate|date('d/m/Y H:i')}}</div>
 														</div>
 
+														<div class="text-success">
+															<div>Durée totale :</div>
+															<div>{{horaires.totalDate}}</div>
+														</div>
 														<div>
 															<div>Date de dernière modification :</div>
 															<div>{{horaires.modifiedDate|date('d/m/Y H:i')}}</div>
@@ -562,9 +565,5 @@
 
 	</body>
 
-	<style>
-		.modal form {
-			display: block;
-		}
-	</style>
+
 {% endblock %}
