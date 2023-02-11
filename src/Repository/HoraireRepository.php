@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Horaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,25 +40,40 @@ class HoraireRepository extends ServiceEntityRepository
         }
     }
 
-    // Find/search title/content
-    public function findByNom(string $query)
+    // recherche
+    /**
+     * récupère les horaires en lien avec une recherche
+     *
+     * @return Horaire[]
+     */
+    public function findSearch(SearchData $search): array
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb
-            ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->orX(
-                        $qb->expr()->like('p.name', ':query'),
-                        $qb->expr()->like('p.comment', ':query'),
-                    ),
-                    $qb->expr()->isNotNull('p.id')
-                )
-            )
-            ->setParameter('query', '%' . $query . '%');
-        return $qb
-            ->getQuery()
-            ->getResult();
+        $query = $this
+            ->createQueryBuilder('p')
+            // selectionne toutes les infos qui sontliés aux types d'horaires mais aussi aux horaires
+            ->select('c', 'p')
+            ->join('p.typeHoraire', 'c');
+
+
+        if (!empty($search->q)) {
+            $query = $query
+                // on veut que le nom de l'horaire (p.name) soit comme le parametre (q)
+                ->andWhere('p.name Like :q')
+                // % permet de faire des recherches partielles
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+        // on gere les horaires
+        if (!empty($search->typeHoraire)) {
+            $query = $query
+                ->andWhere('c.id IN (:typeHoraire)')
+                ->setParameter('typeHoraire', $search->typeHoraire);
+        }
+
+
+        return $query->getQuery()->getResult();
     }
+
 
     //    /**
     //     * @return Horaire[] Returns an array of Horaire objects

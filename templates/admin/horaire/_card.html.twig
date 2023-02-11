@@ -1,0 +1,64 @@
+<div class="row row-striped mt-3 shadow-sm">
+	<div class="col-2 text-right">
+		<h1 class="display-4">
+			<span class="badge badge-secondary">{{horaire.startDate|date('d')}}</span>
+		</h1>
+		<h2>{{horaire.startDate|date('m')}}</h2>
+	</div>
+	<div class="col-10">
+		<h5 class="text-uppercase">
+			<strong>{{horaire.name}}</strong>
+		</h5>
+		<ul class="list-inline">
+			<li class="list-inline-item">
+				<i class="fa fa-calendar-o" aria-hidden="true"></i>
+				Monday</li>
+			<li class="list-inline-item">
+				<i class="fa fa-clock-o" aria-hidden="true"></i>
+				{{horaire.startDate|date('H:i')}}
+				-
+				<span class="fw-bold">{{horaire.endDate|date('d/m/Y H:i')}}</span>
+			</li>
+			<li class="list-inline-item  text-success">
+				<i class="fa fa-location-arrow" aria-hidden="true"></i>
+				Type d'horaire :
+				{{horaire.typeHoraire.name }}</li>
+			<li class="list-inline-item">
+				<i class="fa fa-location-arrow" aria-hidden="true"></i>
+				Priorité :
+				{{horaire.priority }}</li>
+		</ul>
+		<p class="text-success">{{horaire.comment}}</p>
+		<div class="d-flex justify-content-between">
+			<div>
+				<div>Date de création :</div>
+				<div>{{horaire.createdDate|date('d/m/Y H:i')}}</div>
+			</div>
+
+			<div class="text-success">
+				<div>Durée totale :</div>
+				<div>{{horaire.totalDate}}</div>
+			</div>
+			<div>
+				<div>Date de dernière modification :</div>
+				<div>{{horaire.modifiedDate|date('d/m/Y H:i')}}</div>
+			</div>
+		</div>
+		<div class=" mt-3">
+			<div class="d-flex">
+				<div>
+					<a href="{{path('app_edit_horaire', { name: horaire.name }) }}">Modifier</a>
+				</div>
+
+
+				<div class="ml-3">
+					<a href="{{path('app_delete_horaire', {'id': horaire.id}) }}" onclick=" return confirm('Attention, ceci va être supprimé définitivement ') ">Supprimer</a>
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</div>
+</div>

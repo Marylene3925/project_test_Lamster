@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Horaire;
 use App\Form\HoraireType;
+use App\Form\SearchForm;
 use App\Repository\HoraireRepository;
 use DateInterval;
 use Doctrine\ORM\EntityManager;
@@ -16,17 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class HoraireController extends AbstractController
 {
 
-
     #[Route('/', name: 'app_horaire')]
     public function index(Request $request, EntityManagerInterface $entityManager, HoraireRepository $horaireRepository): Response
     {
+        // form recherche
+        $data = new SearchData();
+        $form_data =  $this->createForm(SearchForm::class, $data);
+        $form_data->handleRequest($request);
+        $horaires = $horaireRepository->findSearch($data);
+       
 
         // formulaire pour ajouter un nouvel horaire
         $horaire = new Horaire();
 
         $form = $this->createForm(HoraireType::class, $horaire);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -53,10 +59,10 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire');
         }
 
-       
         return $this->render('admin/horaire/index.html.twig', [
             'form_add_horraire' => $form->createView(),
-            'horaire' => $horaireRepository->findBy([], ['startDate' => 'asc']),
+            'form_search' => $form_data->createView(),
+            'horaires' => $horaires,
 
         ]);
     }

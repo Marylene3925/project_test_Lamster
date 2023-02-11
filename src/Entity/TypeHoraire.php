@@ -72,4 +72,10 @@ class TypeHoraire
 
         return $this;
     }
+
+    // on veut un typeHoraire sous forme de caractere, on renvoie simplement le nom du type d'horaire
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
