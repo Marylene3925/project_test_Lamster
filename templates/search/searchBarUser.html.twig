@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	{{form_start(form) }}
+	{{form_row(form.query)}}
+	{{ form_row(form.recherche) }}
+	{{form_end(form)}}
+
+	<style>
+		form {
+			display: flex;
+		}
+		
+	</style>
+{% endblock %}

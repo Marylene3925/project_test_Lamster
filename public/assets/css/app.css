@@ -1,0 +1,20 @@
+/* partie calendrier */
+.bg_dark_2 {
+	background-color: rgba(7, 5, 5, 0.027);
+}
+
+.row-striped:nth-of-type(odd) {
+	background-color: #efefef;
+	border-left: 4px #000000 solid;
+}
+
+.row-striped:nth-of-type(even) {
+	background-color: #ffffff;
+	border-left: 4px #efefef solid;
+}
+
+.row-striped {
+	padding: 15px 0;
+}
+/* marge */
+.container{padding-top: 8rem;}
