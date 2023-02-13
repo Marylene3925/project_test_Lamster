@@ -46,7 +46,7 @@ class HoraireType extends AbstractType
                 'widget' => 'single_text',
             ])
 
-
+       
             ->add('typeHoraire', EntityType::class, [
                 // looks for choices from this entity
                 'class' => TypeHoraire::class,

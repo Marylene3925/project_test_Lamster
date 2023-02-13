@@ -1,13 +1,17 @@
-
 {{form_start(form_search, {attr: {class: 'filter'}}) }}
-<h5><a href="{{path('app_horaire')}}">Effacer les filtres</a></h5>
-{{form_row(form_search.q, {attr: {class: 'mt-4'}}) }}
-<h5 class="mt-4">Type d'horaires</h5>
-{{form_row(form_search.typeHoraire, {attr: {class: 'mt-2'}}) }}
-<h5 class="mt-4">Priorités</h5>
-{{form_row(form_search.priority, {attr: {class: 'mt-2'}}) }}
-<button type="submit" class="btn btn-outline-success w-100 mt-4">Filtrer</button>
+<h6>
+	<a href="{{path('app_horaire')}}">Effacer les filtres</a>
+</h6>
+{{form_row(form_search.q, {attr: {class: 'mt-2'}}) }}
+<h6 class="mt-2">Type d'horaires</h6>
+{{form_row(form_search.typeHoraire, {attr: {class: 'mt-0'}}) }}
+<h6 class="mt-2">Priorités</h6>
+{{form_row(form_search.priority, {attr: {class: 'mt-0'}}) }}
+<h6 class="mt-2">Date de début</h6>
+{{form_row(form_search.startDate, {attr: {class: 'mt-0'}}) }}
+<h6 class="mt-2">Date de fin</h6>
+{{form_row(form_search.endDate, {attr: {class: 'mt-0'}}) }}
+<button type="submit" class="btn btn-outline-success mb-2 w-100 mt-2">Filtrer</button>
 {{form_end(form_search)}}
-<style>
-form{display: block;}
-</style>
+
+

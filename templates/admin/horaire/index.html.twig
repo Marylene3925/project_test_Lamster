@@ -10,7 +10,7 @@
 
 		<div class="row">
 		
-			<div class="col-md-3 shadow-sm">
+			<div class="col-md-3 shadow-sm ">
 				{% include "admin/horaire/_filter.html.twig" with {form_search: form_search} only %}
 			</div>
 
@@ -187,7 +187,7 @@
 					</h2>
 
 
-					<div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+					<div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 						<div class="accordion-body">
 							{% for horaire in horaires %}
 								{% if ((horaire.startDate|date('Y/m/d H:i')) <= ("now"|date('Y/m/d H:i')) and (horaire.endDate|date('Y/m/d H:i')) >= ("now"|date('Y/m/d H:i'))) %}

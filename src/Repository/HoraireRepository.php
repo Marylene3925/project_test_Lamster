@@ -59,34 +59,45 @@ class HoraireRepository extends ServiceEntityRepository
         if (!empty($search->q)) {
             $query = $query
                 // on veut que le nom de l'horaire (p.name) soit comme le parametre (q)
-                ->andWhere('p.name Like :q')
+                ->andWhere('p.name Like :q OR p.comment Like :q')
                 // % permet de faire des recherches partielles
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        // on gere les horaires
+        // filtre par type horaires
         if (!empty($search->typeHoraire)) {
             $query = $query
                 ->andWhere('c.id IN (:typeHoraire)')
                 ->setParameter('typeHoraire', $search->typeHoraire);
         }
 
+        // filtre par priorité
         if (!empty($search->priority)) {
             $query = $query
-                // ->andWhere('c.id IN (:priority)')
-                // ->setParameter('priority', $search->priority)
                 ->andWhere('p.priority IN (:priority)')
-                -> setParameter('priority', $search->priority)
-                
-                
-                ;
+                ->setParameter('priority', $search->priority);
+        }
+
+        //  filtre par date de début
+        if (!empty($search->startDate)) {
+            $query = $query
+                ->andWhere('p.startDate >= :min')
+                ->setParameter('min', $search->startDate);
+        }
+
+        // filtre par date de fin
+        if (!empty($search->endDate)) {
+            $query = $query
+                ->andWhere('p.endDate <= :max')
+                ->setParameter('max', $search->endDate);
         }
 
 
-
+      
 
         return $query->getQuery()->getResult();
     }
+    
 
 
     //    /**

@@ -78,4 +78,6 @@ class TypeHoraire
     {
         return $this->name;
     }
+
+   
 }
