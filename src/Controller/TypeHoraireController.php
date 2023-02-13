@@ -16,7 +16,6 @@ class TypeHoraireController extends AbstractController
     #[Route('/type_horaire', name: 'app_type_horaire')]
     public function index(Request $request, EntityManagerInterface $entityManager, TypeHoraireRepository $typeHoraireRepository): Response
     {
-
         // formulaire pour ajouter un nouveau type horaire
         $typeHoraire = new TypeHoraire();
         $form = $this->createForm(TypeHoraireType::class, $typeHoraire);

@@ -19,5 +19,22 @@ class SearchData
      */
     public $typeHoraire = [];
 
-    // 
+     // tableau des horaires selectionner
+    /**
+     * Undocumented variable
+     *
+     * @var array
+     */
+    public $horaire = []; 
+
+    //  -- on gère les priorités
+    /**
+     * Undocumented variable
+     *
+     * @var array
+     */
+    public $priority = []; 
+
+    
+    
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Data\SearchData;
 use App\Entity\Horaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -69,6 +70,19 @@ class HoraireRepository extends ServiceEntityRepository
                 ->andWhere('c.id IN (:typeHoraire)')
                 ->setParameter('typeHoraire', $search->typeHoraire);
         }
+
+        if (!empty($search->priority)) {
+            $query = $query
+                // ->andWhere('c.id IN (:priority)')
+                // ->setParameter('priority', $search->priority)
+                ->andWhere('p.priority IN (:priority)')
+                -> setParameter('priority', $search->priority)
+                
+                
+                ;
+        }
+
+
 
 
         return $query->getQuery()->getResult();

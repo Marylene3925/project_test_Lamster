@@ -3,12 +3,16 @@
 namespace App\Form;
 
 use App\Data\SearchData;
+use App\Entity\Horaire;
 use App\Entity\TypeHoraire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class SearchForm extends AbstractType
 {
@@ -26,6 +30,19 @@ class SearchForm extends AbstractType
                     'placeholder' => 'Rechercher'
 
                 ]
+            ])
+
+            ->add('priority', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'choices'  => [
+                    "priorité 1" => "1",
+                    "priorité 2" => "2",
+                    "priorité 3" => "3",
+                ],  
+                 'expanded' => true,
+                'multiple' => true,
+
             ])
 
             ->add('typeHoraire', EntityType::class, [

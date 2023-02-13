@@ -7,8 +7,6 @@ use App\Entity\Horaire;
 use App\Form\HoraireType;
 use App\Form\SearchForm;
 use App\Repository\HoraireRepository;
-use DateInterval;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +24,7 @@ class HoraireController extends AbstractController
         $form_data =  $this->createForm(SearchForm::class, $data);
         $form_data->handleRequest($request);
         $horaires = $horaireRepository->findSearch($data);
-       
+
 
         // formulaire pour ajouter un nouvel horaire
         $horaire = new Horaire();
@@ -72,6 +70,11 @@ class HoraireController extends AbstractController
     public function edit_marque(Horaire $horaire, HoraireRepository $horaireRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
 
+        // form recherche
+        $data = new SearchData();
+        $form_data =  $this->createForm(SearchForm::class, $data);
+        $form_data->handleRequest($request);
+
         $form = $this->createForm(HoraireType::class, $horaire);
 
         $form->handleRequest($request);
@@ -104,8 +107,8 @@ class HoraireController extends AbstractController
 
         return $this->render('admin/horaire/edit.html.twig', [
             'horaire' => $horaireRepository->findBy([], ['name' => 'asc']),
-            'form_edit_horraire' => $form->createView()
-
+            'form_edit_horraire' => $form->createView(),
+            'form_search' => $form_data->createView(),
         ]);
     }
 

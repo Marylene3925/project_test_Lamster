@@ -39,24 +39,7 @@ class TypeHoraireRepository extends ServiceEntityRepository
         }
     }
 
-        // Find/search title/content
-        public function findByNomTypeHoraire(string $query)
-        {
-            $qb = $this->createQueryBuilder('p');
-            $qb
-                ->where(
-                    $qb->expr()->andX(
-                        $qb->expr()->orX(
-                            $qb->expr()->like('p.name', ':query'),
-                        ),
-                        $qb->expr()->isNotNull('p.id')
-                    )
-                )
-                ->setParameter('query', '%' . $query . '%');
-            return $qb
-                ->getQuery()
-                ->getResult();
-        }
+      
 //    /**
 //     * @return TypeHoraire[] Returns an array of TypeHoraire objects
 //     */
