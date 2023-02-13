@@ -1,10 +1,26 @@
-<div class="row row-striped mt-3 shadow-sm">
-	<div class="col-2 text-right">
-		<h1 class="display-4">
-			<span class="badge badge-secondary">{{horaire.startDate|date('d')}}</span>
-		</h1>
-		<h2>{{horaire.startDate|date('m/y')}}</h2>
-	</div>
+<div class="row row-striped mt-3 shadow-sm ">
+	{% set trans_day_hash = { 
+        "Monday": "Lundi", 
+        "Tuesday": "Mardi", 
+        "Wednesday": "Mercredi", 
+        "Thursday": "Jeudi", 
+        "Friday": "Vendredi", 
+        "Saturday": "Samedi", 
+        "Sunday": "Dimanche", 
+		 "January": "Janvier",
+		 "February" : "Février",
+		 "March" : "Mars",
+		 "April" : "Avril", 
+		 "May" : "Mai", 
+		 "June" : "Juin", 
+		 "July" : "Juillet", 
+		 "August" : "Aout", 
+		 "September" : "Septembre", 
+		 "October" : "Octobre", 
+		" November" : "Novembre", 
+		 "December" : "Décembre", 
+    } 
+%}
 	<div class="col-10">
 		<h5 class="text-uppercase">
 			<strong>{{horaire.name}}</strong>
@@ -12,22 +28,43 @@
 		<ul class="list-inline">
 			<li class="list-inline-item">
 				<i class="fa fa-calendar-o" aria-hidden="true"></i>
-				Monday</li>
-			<li class="list-inline-item">
+
+				{{ trans_day_hash[horaire.startDate|date('l')] }}
+				{{horaire.startDate|date('d')}}
+				{{ trans_day_hash[horaire.startDate|date('F')] }}
+				{{horaire.startDate|date('Y')}}
 				<i class="fa fa-clock-o" aria-hidden="true"></i>
 				{{horaire.startDate|date('H:i')}}
-				-
-				<span class="fw-bold">{{horaire.endDate|date('d/m/Y H:i')}}</span>
+				||
 			</li>
-			<li class="list-inline-item  text-success">
-				<i class="fa fa-location-arrow" aria-hidden="true"></i>
-				Type d'horaire :
-				{{horaire.typeHoraire.name }}</li>
 			<li class="list-inline-item">
-				<i class="fa fa-location-arrow" aria-hidden="true"></i>
-				Priorité :
-				{{horaire.priority }}</li>
+
+				<i class="fa fa-calendar-o" aria-hidden="true"></i>
+				<span class="fw-bold text-success">
+					{{ trans_day_hash[horaire.endDate|date('l')] }}
+					{{horaire.endDate|date('d')}}
+					{{ trans_day_hash[horaire.endDate|date('F')] }}
+					{{horaire.endDate|date('Y')}}
+					<i class="fa fa-clock-o" aria-hidden="true"></i>
+					{{horaire.endDate|date('H:i')}}
+				</span>
+			</li>
 		</ul>
+
+
+		<div class="text-success ">
+			<div>Durée totale :</div>
+			<div>{{horaire.totalDate}}</div>
+		</div>
+		<div class="list-inline-item mt-2">
+			<i class="fa fa-location-arrow" aria-hidden="true"></i>
+			Type d'horaire :
+			{{horaire.typeHoraire.name }}
+			| Priorité :
+			{{horaire.priority }}
+		</div>
+
+
 		<p class="text-success">{{horaire.comment}}</p>
 		<div class="d-flex justify-content-between">
 			<div>
@@ -35,10 +72,7 @@
 				<div>{{horaire.createdDate|date('d/m/Y H:i')}}</div>
 			</div>
 
-			<div class="text-success">
-				<div>Durée totale :</div>
-				<div>{{horaire.totalDate}}</div>
-			</div>
+
 			<div>
 				<div>Date de dernière modification :</div>
 				<div>{{horaire.modifiedDate|date('d/m/Y H:i')}}</div>
